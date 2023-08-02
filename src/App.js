@@ -3,13 +3,14 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Home from "./components/Home";
 import { Route, Routes } from "react-router-dom";
-import { Container } from "react-bootstrap";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import NewCalendar from './components/NewCalendar'
+
 
 const App = () => {
   return (
-    <Container>
+    <>
       <UserAuthContextProvider>
         <Routes>
           <Route path="/" element={<Login />} />
@@ -22,9 +23,10 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+           <Route path="/home/calendar" element={<NewCalendar />} />
         </Routes>
       </UserAuthContextProvider>
-    </Container>
+    </>
   );
 };
 

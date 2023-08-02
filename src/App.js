@@ -5,13 +5,14 @@ import Home from "./components/Home";
 import { Route, Routes } from "react-router-dom";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
-import NewCalendar from './components/NewCalendar'
-
+import NavBar from "./components/NavBar";
+import NewCalendar from "./components/NewCalendar";
 
 const App = () => {
   return (
     <>
       <UserAuthContextProvider>
+        <NavBar />
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -23,7 +24,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-           <Route path="/home/calendar" element={<NewCalendar />} />
+          <Route path="/home/calendar" element={<NewCalendar />} />
         </Routes>
       </UserAuthContextProvider>
     </>

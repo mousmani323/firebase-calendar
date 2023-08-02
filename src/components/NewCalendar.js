@@ -21,8 +21,8 @@ const NewCalendar = () => {
   const [editedEvent, setEditedEvent] = useState({});
   const [editEvent, setEditEvent] = useState(null);
 
-  const calendarStyle = {
-    maxWidth: "1000px",
+  const calendarContainerStyle = {
+    maxWidth: "500px",
     margin: "0 auto",
     padding: "20px",
     borderRadius: "5px",
@@ -140,157 +140,161 @@ const NewCalendar = () => {
   };
 
   return (
-    <div style={calendarStyle}>
-      <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        headerToolbar={{
-          left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay",
-        }}
-        initialView="dayGridMonth"
-        selectable={true}
-        editable={true}
-        events={events}
-        dateClick={handleDateClick}
-        eventClick={handleEventClick}
-        select={handleDateRangeSelect}
-      />
-      {/* Add Event Modal */}
-      <Modal show={showAddModal} onHide={handleCloseAddModal} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Event</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group controlId="formTitle">
-              <Form.Label>Title</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter title"
-                value={newEvent.title}
-                onChange={(e) =>
-                  setNewEvent({ ...newEvent, title: e.target.value })
-                }
-              />
-            </Form.Group>
-            <Form.Group controlId="formLocation">
-              <Form.Label>Location</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter location"
-                value={newEvent.location}
-                onChange={(e) =>
-                  setNewEvent({ ...newEvent, location: e.target.value })
-                }
-              />
-            </Form.Group>
-            <Form.Group controlId="formDescription">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                placeholder="Enter description"
-                value={newEvent.description}
-                onChange={(e) =>
-                  setNewEvent({ ...newEvent, description: e.target.value })
-                }
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseAddModal}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleSaveEvent}>
-            Save
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      ;{/* Edit Event Modal */}
-      <Modal show={showEditModal} onHide={handleCloseEditModal} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Event</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group controlId="formEditTitle">
-              <Form.Label>Title</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter title"
-                value={editedEvent?.title}
-                onChange={(e) =>
-                  setEditedEvent({ ...editedEvent, title: e.target.value })
-                }
-              />
-            </Form.Group>
-            <Form.Group controlId="formEditLocation">
-              <Form.Label>Location</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter location"
-                value={editedEvent?.location}
-                onChange={(e) =>
-                  setEditedEvent({ ...editedEvent, location: e.target.value })
-                }
-              />
-            </Form.Group>
-            <Form.Group controlId="formEditDescription">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                placeholder="Enter description"
-                value={editedEvent?.description}
-                onChange={(e) =>
-                  setEditedEvent({
-                    ...editedEvent,
-                    description: e.target.value,
-                  })
-                }
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseEditModal}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleSaveChanges}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      ;
-      <Modal
-        show={modalData !== null}
-        onHide={() => setModalData(null)}
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title style={titleStyle}>{modalData?.title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p style={{ fontWeight: "bold" }}>Title:</p>
-          <p>{modalData?.title}</p>
-          <p style={{ fontWeight: "bold" }}>Location:</p>
-          <p>{modalData?.extendedProps?.location}</p>
-          <p style={{ fontWeight: "bold" }}>Description:</p>
-          <p>{modalData?.extendedProps?.description}</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleEdit}>
-            Edit
-          </Button>
-          <Button variant="danger" onClick={handleDelete}>
-            Delete
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      ; ;
-    </div>
+    <>
+      <h2 className="d-flex justify-content-center m-4">Calendar Component</h2>
+      <div style={calendarContainerStyle} >
+        <FullCalendar
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          headerToolbar={{
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay",
+          }}
+          initialView="dayGridMonth"
+          selectable={true}
+          editable={true}
+          events={events}
+          dateClick={handleDateClick}
+          eventClick={handleEventClick}
+          select={handleDateRangeSelect}
+          height={"400px"}
+        />
+        {/* Add Event Modal */}
+        <Modal show={showAddModal} onHide={handleCloseAddModal} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>Add Event</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group controlId="formTitle">
+                <Form.Label>Title</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter title"
+                  value={newEvent.title}
+                  onChange={(e) =>
+                    setNewEvent({ ...newEvent, title: e.target.value })
+                  }
+                />
+              </Form.Group>
+              <Form.Group controlId="formLocation">
+                <Form.Label>Location</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter location"
+                  value={newEvent.location}
+                  onChange={(e) =>
+                    setNewEvent({ ...newEvent, location: e.target.value })
+                  }
+                />
+              </Form.Group>
+              <Form.Group controlId="formDescription">
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  placeholder="Enter description"
+                  value={newEvent.description}
+                  onChange={(e) =>
+                    setNewEvent({ ...newEvent, description: e.target.value })
+                  }
+                />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseAddModal}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleSaveEvent}>
+              Save
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        ;{/* Edit Event Modal */}
+        <Modal show={showEditModal} onHide={handleCloseEditModal} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Event</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group controlId="formEditTitle">
+                <Form.Label>Title</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter title"
+                  value={editedEvent?.title}
+                  onChange={(e) =>
+                    setEditedEvent({ ...editedEvent, title: e.target.value })
+                  }
+                />
+              </Form.Group>
+              <Form.Group controlId="formEditLocation">
+                <Form.Label>Location</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter location"
+                  value={editedEvent?.location}
+                  onChange={(e) =>
+                    setEditedEvent({ ...editedEvent, location: e.target.value })
+                  }
+                />
+              </Form.Group>
+              <Form.Group controlId="formEditDescription">
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  placeholder="Enter description"
+                  value={editedEvent?.description}
+                  onChange={(e) =>
+                    setEditedEvent({
+                      ...editedEvent,
+                      description: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseEditModal}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleSaveChanges}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        ;
+        <Modal
+          show={modalData !== null}
+          onHide={() => setModalData(null)}
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title style={titleStyle}>{modalData?.title}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p style={{ fontWeight: "bold" }}>Title:</p>
+            <p>{modalData?.title}</p>
+            <p style={{ fontWeight: "bold" }}>Location:</p>
+            <p>{modalData?.extendedProps?.location}</p>
+            <p style={{ fontWeight: "bold" }}>Description:</p>
+            <p>{modalData?.extendedProps?.description}</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleEdit}>
+              Edit
+            </Button>
+            <Button variant="danger" onClick={handleDelete}>
+              Delete
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        ; ;
+      </div>
+    </>
   );
 };
 

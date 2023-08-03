@@ -7,12 +7,13 @@ import { UserAuthContextProvider } from "./context/UserAuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NavBar from "./components/NavBar";
 import NewCalendar from "./components/NewCalendar";
+import CounselingForm from "./components/CounselingForm";
 
 const App = () => {
   return (
     <>
       <UserAuthContextProvider>
-        <NavBar />
+        <ProtectedRoute> <NavBar /> </ProtectedRoute>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -24,7 +25,8 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          <Route path="/home/calendar" element={<NewCalendar />} />
+          <Route path="/home/calendar" element={<ProtectedRoute><NewCalendar /></ProtectedRoute>} />
+          <Route path="/home/counseling_form" element={<ProtectedRoute><CounselingForm /></ProtectedRoute>} />
         </Routes>
       </UserAuthContextProvider>
     </>
